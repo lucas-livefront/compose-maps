@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.FabPosition
 import androidx.compose.material.Text
@@ -168,11 +169,12 @@ fun SearchHeader(
                 start = 24.dp,
                 top = 16.dp,
             )
-            .height(actualHeaderLineHeight.toDp()),
+            .wrapContentHeight(),
     ) {
         Text(
             text = "Compose Map",
             fontSize = actualHeaderFontSize,
+            lineHeight = actualHeaderLineHeight,
         )
     }
     Row(
