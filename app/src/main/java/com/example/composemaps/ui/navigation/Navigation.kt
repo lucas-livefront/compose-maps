@@ -1,19 +1,11 @@
-package com.example.composemaps.ui.utils
+package com.example.composemaps.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.composemaps.ui.navigation.Destinations
 import com.example.composemaps.ui.search.SearchScreen
-
-sealed class Destinations {
-    abstract val key: String
-
-    object Search: Destinations() {
-        override val key: String
-            get() = "search"
-    }
-}
 
 @Composable
 fun ScreenDispatcher() {
