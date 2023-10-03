@@ -2,6 +2,7 @@ package com.example.composemaps.ui.keyboard
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
 import androidx.compose.material.OutlinedTextField
@@ -26,6 +27,7 @@ import androidx.compose.ui.unit.dp
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun KeyboardScreen(
+    onToMapClicked: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val focusRequester = remember { FocusRequester() }
@@ -49,30 +51,44 @@ fun KeyboardScreen(
     }
 
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.End,
         modifier = modifier,
     ) {
-        OutlinedTextField(
-            value = value,
-            onValueChange = { value = it },
-            modifier = Modifier
-                .focusRequester(focusRequester)
-                .onFocusChanged {
-                    // If a user taps the text field, focus is gained. This
-                    // helps us set `keyboardShouldBeFocused` in that case.
-                    if (keyboardShouldBeOpen.not()) {
-                        keyboardShouldBeOpen = it.isFocused
-                    }
-                    textFieldIsFocused = it.isFocused
-                }
-        )
-
         Button(
-            onClick =  { keyboardShouldBeOpen = keyboardShouldBeOpen.not() },
-            modifier = Modifier.padding(top = 16.dp)
+            onClick = onToMapClicked,
+            modifier = Modifier.padding(16.dp),
         ) {
-            Text("Toggle the keyboard")
+            Text(text = "To map")
+        }
+
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f),
+        ) {
+            OutlinedTextField(
+                value = value,
+                onValueChange = { value = it },
+                modifier = Modifier
+                    .focusRequester(focusRequester)
+                    .onFocusChanged {
+                        // If a user taps the text field, focus is gained. This
+                        // helps us set `keyboardShouldBeFocused` in that case.
+                        if (keyboardShouldBeOpen.not()) {
+                            keyboardShouldBeOpen = it.isFocused
+                        }
+                        textFieldIsFocused = it.isFocused
+                    }
+            )
+
+            Button(
+                onClick = { keyboardShouldBeOpen = keyboardShouldBeOpen.not() },
+                modifier = Modifier.padding(top = 16.dp)
+            ) {
+                Text("Toggle the keyboard")
+            }
         }
     }
 }

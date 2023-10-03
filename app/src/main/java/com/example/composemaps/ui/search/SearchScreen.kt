@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
 import androidx.compose.material.FabPosition
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -57,10 +58,12 @@ private val SubheaderLineHeightDeltaSp = SubheaderExpandedLineHeightSp - Subhead
 
 @Composable
 fun SearchScreen(
-    viewModel: SearchViewModel = hiltViewModel()
+    onToKeyboardClicked: () -> Unit,
+    viewModel: SearchViewModel = hiltViewModel(),
 ) {
     val searchScreenContent by viewModel.searchScreenContent.collectAsState(initial = SearchScreenContent.DEFAULT)
-    val totalHeaderDeltaDp = SubheaderBottomPaddingDelta + SubheaderLineHeightDeltaSp.toDp() + HeaderLineHeightDeltaSp.toDp()
+    val totalHeaderDeltaDp =
+        SubheaderBottomPaddingDelta + SubheaderLineHeightDeltaSp.toDp() + HeaderLineHeightDeltaSp.toDp()
 
     MultistageBottomSheetScaffold(
         bottomSheetDraggedToNewStateCallback = viewModel::onDragToNewState,
@@ -75,7 +78,12 @@ fun SearchScreen(
             )
         },
         bottomSheetState = searchScreenContent.searchScreenState.bottomSheetState,
-        header = { SearchHeader(it) },
+        header = {
+            SearchHeader(
+                expansionPercentage = it,
+                onToKeyboardClicked = onToKeyboardClicked,
+            )
+        },
         headerCollapseDeltaDp = totalHeaderDeltaDp,
         fab = {
             SearchFab(
@@ -131,6 +139,7 @@ fun BottomSheetHeader(
 
 @Composable
 fun SearchHeader(
+    onToKeyboardClicked: () -> Unit,
     expansionPercentage: Float,
 ) {
     val actualSubheaderBottomPadding = lerp(
@@ -176,6 +185,15 @@ fun SearchHeader(
             fontSize = actualHeaderFontSize,
             lineHeight = actualHeaderLineHeight,
         )
+
+        Spacer(modifier = Modifier.weight(1f))
+
+        Button(
+            onClick = onToKeyboardClicked,
+            modifier = Modifier.padding(16.dp),
+        ) {
+            Text(text = "To keyboard")
+        }
     }
     Row(
         verticalAlignment = Alignment.CenterVertically,

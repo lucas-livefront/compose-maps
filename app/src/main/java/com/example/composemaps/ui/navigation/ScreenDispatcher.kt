@@ -7,7 +7,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.composemaps.ui.keyboard.KeyboardScreen
-import com.example.composemaps.ui.navigation.Destinations
 import com.example.composemaps.ui.search.SearchScreen
 
 @Composable
@@ -16,11 +15,14 @@ fun ScreenDispatcher() {
 
     NavHost(navController = navController, startDestination = Destinations.Keyboard.key) {
         composable(route = Destinations.Search.key) {
-            SearchScreen()
+            SearchScreen(
+                onToKeyboardClicked = { navController.navigate(Destinations.Keyboard.key) },
+            )
         }
         composable(route = Destinations.Keyboard.key) {
             KeyboardScreen(
-               modifier = Modifier.fillMaxSize(),
+                onToMapClicked = { navController.navigate(Destinations.Search.key) },
+                modifier = Modifier.fillMaxSize(),
             )
         }
     }
