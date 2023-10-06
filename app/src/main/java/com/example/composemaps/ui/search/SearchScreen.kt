@@ -241,7 +241,7 @@ sealed class SearchScreenState {
 
     abstract val searchFabState: SearchFabState
 
-    object FullMap : SearchScreenState() {
+    data object FullMap : SearchScreenState() {
         override val bottomSheetState: MultistageBottomSheetState get() = MultistageBottomSheetState.Gone
         override val searchFabState: SearchFabState
             get() = SearchFabState(
@@ -251,7 +251,7 @@ sealed class SearchScreenState {
             )
     }
 
-    object FullerList : SearchScreenState() {
+    data object FullerList : SearchScreenState() {
         override val bottomSheetState: MultistageBottomSheetState get() = MultistageBottomSheetState.Fuller
         override val searchFabState: SearchFabState
             get() = SearchFabState(
@@ -261,7 +261,7 @@ sealed class SearchScreenState {
             )
     }
 
-    object FullList : SearchScreenState() {
+    data object FullList : SearchScreenState() {
         override val bottomSheetState: MultistageBottomSheetState get() = MultistageBottomSheetState.Full
         override val searchFabState: SearchFabState
             get() = SearchFabState(

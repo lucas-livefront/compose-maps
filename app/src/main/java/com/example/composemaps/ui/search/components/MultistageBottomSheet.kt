@@ -95,7 +95,7 @@ sealed class MultistageBottomSheetState : Parcelable {
     )
 
     @Parcelize
-    object Fuller : MultistageBottomSheetState() {
+    data object Fuller : MultistageBottomSheetState() {
         override val expansionPercentage: Float get() = 0f
         override val percentOffset: Float get() = 0f
         override fun calculateAdditionalOffset(
@@ -105,7 +105,7 @@ sealed class MultistageBottomSheetState : Parcelable {
     }
 
     @Parcelize
-    object Full : MultistageBottomSheetState() {
+    data object Full : MultistageBottomSheetState() {
         override val expansionPercentage: Float get() = 1f
         override val percentOffset: Float get() = 0f
         override fun calculateAdditionalOffset(
@@ -115,7 +115,7 @@ sealed class MultistageBottomSheetState : Parcelable {
     }
 
     @Parcelize
-    object Gone : MultistageBottomSheetState() {
+    data object Gone : MultistageBottomSheetState() {
         override val expansionPercentage: Float get() = 1f
         override val percentOffset: Float get() = 1f
         override fun calculateAdditionalOffset(
@@ -125,7 +125,7 @@ sealed class MultistageBottomSheetState : Parcelable {
     }
 
     @Parcelize
-    object Half : MultistageBottomSheetState() {
+    data object Half : MultistageBottomSheetState() {
         override val expansionPercentage: Float get() = 1f
         override val percentOffset: Float get() = .5f
         override fun calculateAdditionalOffset(

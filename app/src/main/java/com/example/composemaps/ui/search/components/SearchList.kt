@@ -69,13 +69,13 @@ data class SearchListContent(
 )
 
 sealed class SearchListData {
-    object Error : SearchListData()
+    data object Error : SearchListData()
 
     data class Loaded(
         val listRowData: List<SearchListRowData>,
     ) : SearchListData()
 
-    object Loading : SearchListData()
+    data object Loading : SearchListData()
 }
 
 data class SearchListRowData(

@@ -53,13 +53,13 @@ data class SearchMapContent(
 sealed class SearchMapData {
     val zoom: Float = 10f
 
-    object Error : SearchMapData()
+    data object Error : SearchMapData()
 
     data class Loaded(
         val markers: List<MarkerData>,
     ) : SearchMapData()
 
-    object Loading : SearchMapData()
+    data object Loading : SearchMapData()
 }
 
 data class MarkerData(
